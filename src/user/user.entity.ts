@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  BeforeInsert,
+} from 'typeorm';
 import { Account } from 'src/account/account.entity';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class User {
@@ -7,10 +14,10 @@ export class User {
   id: number;
 
   @Column()
-  name: string;
+  email: string;
 
   @Column()
-  email: string;
+  name: string;
 
   @Column()
   password: string;
@@ -22,9 +29,14 @@ export class User {
   country: string;
 
   // The last field should be for files, but I couldn't quite figure out in time
-  @Column()
-  proofOfIdentity: any;
+  // @Column()
+  // proofOfIdentity: any;
 
   @OneToMany(() => Account, (account) => account.user)
   account: Account[];
+
+  @BeforeInsert()
+  async hashPassword() {
+    if (this.password) this.password = await bcrypt.hash(this.password, 12);
+  }
 }

@@ -1,0 +1,44 @@
+### Create a new user
+POST http://localhost:3000/auth/signup
+content-type: application/json
+
+{
+    "name": "Phuc Nguyen",
+    "email": "test@gmail.com",
+    "password": "password@123",
+    "phoneNumber": "+84934143256",
+    "country": "VN"
+}
+
+### Signing in
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "password@123"
+}
+
+### Get the current user
+GET http://localhost:3000/auth/whoami
+
+### Signing out of the current user
+POST http://localhost:3000/auth/signout
+
+### Create a new savings account
+POST http://localhost:3000/account/create
+content-type: application/json
+
+{
+    "accountType": "savings",
+    "accountBalance": "1000"
+}
+
+### Create a new current account
+POST http://localhost:3000/account/create
+content-type: application/json
+
+{
+    "accountType": "current",
+    "accountBalance": "1000"
+}

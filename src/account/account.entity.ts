@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { User } from 'src/user/user.entity';
 
 @Entity()
@@ -7,22 +7,13 @@ export class Account {
   id: number;
 
   @Column()
-  salesPrice: number;
+  accountType: string;
 
   @Column()
-  make: string;
+  accountNumber: string
 
   @Column()
-  model: string;
-
-  @Column()
-  lng: number;
-
-  @Column()
-  lat: number;
-
-  @Column()
-  mileage: number;
+  accountBalance: number
 
   @ManyToOne(() => User, (user) => user.account)
   user: User;
